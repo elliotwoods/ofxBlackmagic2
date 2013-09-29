@@ -1,5 +1,5 @@
 #include "Utils.h"
-#include "ofMain.h"
+#include <iostream>
 
 namespace ofxBlackMagic {
 	namespace Utils {
@@ -10,8 +10,8 @@ namespace ofxBlackMagic {
 		CoManager::CoManager() {
 			auto result = CoInitialize(NULL);
 			if (FAILED(result)) {
-				ofSystemAlertDialog("ofxBlackMagic failed to initialise COM. Now quitting.");
-				ofExit();
+				std::cout << "ofxBlackMagic failed to initialise COM. Now quitting.";
+				std::exit(1);
 			}
 		}
 

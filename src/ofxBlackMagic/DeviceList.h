@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <ostream>
-#include "DeckLinkAPI.h"
+#include "DeckLinkAPI_h.h"
 
 #include "Utils.h"
 

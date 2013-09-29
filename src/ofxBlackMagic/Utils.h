@@ -1,5 +1,5 @@
 #pragma once
-#include "DeckLinkAPI.h"
+#include "DeckLinkAPI_h.h"
 #include <string>
 
 namespace ofxBlackMagic {
