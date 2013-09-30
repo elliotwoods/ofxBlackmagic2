@@ -24,7 +24,7 @@ If you want to add ofxBlackmagic2 to an existing project, then you need to do th
 
 1. Right click on your app project in Visual Studio and select 'Properties'.
 2. In the `<u>C</u>onfiguration` drop down box select `All Configurations` (this means that you're editing Debug and Release at the same time).
-3. Browse the tree on the left to `Configuration Properties`\`C/C++`\`Advanced`
+3. Browse the tree on the left to `Configuration Properties\ C/C++ \ Advanced`
 4. Change the property `CompileAs` so that it reads `Default`
 5. Hit `OK` to save
 
