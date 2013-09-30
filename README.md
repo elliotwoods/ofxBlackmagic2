@@ -35,6 +35,7 @@ If you don't make this change, then it's highly likely that you'll experience li
 ofxBlackmagic2 follows the pattern of 'one project and one namespace per sizeable addon' pattern. This means that the best way of using ofxBlackmagic2 is __NOT__ to put the files from  `ofxBlackmagic2/src` into your app project, but to add the `ofxBlackmagicLib/ofxBlackmagicLib.vcxproj` project to your app's solution, and to add __only__ the `ofxBlackmagic2/src` to your include search path.
 
 To do this follow these steps:
+
 1. Right click on your solution and choose `Add`\`Existing Project...`
 2. Select `ofxBlackmagic2/ofxBlackmagicLib/ofxBlackmagicLib.vcxproj`
 3. Right click on your app project and select `Properties`
