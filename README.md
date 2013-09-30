@@ -30,9 +30,9 @@ If you want to add ofxBlackmagic2 to an existing project, then you need to do th
 
 If you don't make this change, then it's highly likely that you'll experience linker errors (e.g. something like 'undefined symbols'). See http://forum.blackmagicdesign.com/viewtopic.php?f=10&t=13195 for more details.
 
-#### Ass ofxBlackmagicLib
+#### Using ofxBlackmagicLib pattern
 
-ofxBlackmagic2 follows the pattern of 'one project and one namespace per sizeable addon' pattern. This means that the best way of using ofxBlackmagic2 is __NOT__ to put the files from  `ofxBlackmagic2/src` into your app project, but to add the `ofxBlackmagicLib/ofxBlackmagicLib.vcxproj` project to your app's solution.
+ofxBlackmagic2 follows the pattern of 'one project and one namespace per sizeable addon' pattern. This means that the best way of using ofxBlackmagic2 is __NOT__ to put the files from  `ofxBlackmagic2/src` into your app project, but to add the `ofxBlackmagicLib/ofxBlackmagicLib.vcxproj` project to your app's solution, and to add __only__ the `ofxBlackmagic2/src` to your include search path.
 
 To do this follow these steps:
 1. Right click on your solution and choose `Add`\`Existing Project...`
