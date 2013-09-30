@@ -54,12 +54,10 @@
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalIncludeDirectories>..\..\..\addons\ofxBlackmagic2\libs\DeckLinkAPI;..\..\..\addons\ofxBlackmagic2\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -77,7 +75,6 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\..\..\addons\ofxBlackmagic2\libs\DeckLinkAPI;..\..\..\addons\ofxBlackmagic2\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -92,7 +89,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\libs\DeckLinkAPI\DeckLinkAPI_i.c" />
+    <ClCompile Include="..\src\ofxBlackmagic\DeckLinkAPI\DeckLinkAPI_i.c" />
     <ClCompile Include="..\src\ofxBlackMagic\DeviceList.cpp" />
     <ClCompile Include="..\src\ofxBlackMagic\Iterator.cpp" />
     <ClCompile Include="..\src\ofxBlackMagic\Utils.cpp" />
@@ -101,10 +98,11 @@
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\libs\DeckLinkAPI\DeckLinkAPI.h" />
-    <ClInclude Include="..\libs\DeckLinkAPI\DeckLinkAPI_h.h" />
     <ClInclude Include="..\src\ofxBlackMagic.h" />
+    <ClInclude Include="..\src\ofxBlackmagic\DeckLinkAPI\DeckLinkAPI_h.h" />
+    <ClInclude Include="..\src\ofxBlackMagic\DeckLink_h.h" />
     <ClInclude Include="..\src\ofxBlackMagic\DeviceList.h" />
+    <ClInclude Include="..\src\ofxBlackMagic\DeckLink_c.h" />
     <ClInclude Include="..\src\ofxBlackMagic\Iterator.h" />
     <ClInclude Include="..\src\ofxBlackMagic\Utils.h" />
     <ClInclude Include="..\src\ofxBlackMagic\VideoInput.h" />

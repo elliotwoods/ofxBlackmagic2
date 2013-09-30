@@ -2,20 +2,21 @@
 #include <vector>
 #include <string>
 #include <ostream>
-#include "DeckLinkAPI_h.h"
 
 #include "Utils.h"
+
+class IDeckLink;
 
 namespace ofxBlackMagic {
 	struct DeviceDefinition {
 		IDeckLink* device;
-		std::string displayName;
 		std::string modelName;
 	};
-	
-	std::ostream& operator<<(std::ostream&, DeviceDefinition&);
 
 	class DeviceList : public std::vector<DeviceDefinition> {
 
 	};
+
+	std::ostream& operator<<(std::ostream&, DeviceDefinition&);
+	std::ostream& operator<<(std::ostream&, DeviceDefinition&);
 }

@@ -1,5 +1,6 @@
 #include "Utils.h"
 #include <iostream>
+#include "DeckLink_c.h"
 
 namespace ofxBlackMagic {
 	namespace Utils {

@@ -1,4 +1,5 @@
 #include "Iterator.h"
+#include "DeckLink_c.h"
 
 namespace ofxBlackMagic {
 	//---------
@@ -11,13 +12,11 @@ namespace ofxBlackMagic {
 		{
 			DeviceDefinition deviceDefinition;
 
-			BSTR displayName, modelName;
+			BSTR modelName;
 
-			device->GetDisplayName(&displayName);
 			device->GetModelName(&modelName);
 
 			deviceDefinition.device = device;
-			deviceDefinition.displayName = Utils::BSTRToString(displayName);
 			deviceDefinition.modelName = Utils::BSTRToString(modelName); 
 			deviceList.push_back(deviceDefinition);
 		}

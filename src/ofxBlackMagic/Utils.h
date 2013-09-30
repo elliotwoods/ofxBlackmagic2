@@ -1,6 +1,6 @@
 #pragma once
-#include "DeckLinkAPI_h.h"
 #include <string>
+#include <wtypes.h>
 
 namespace ofxBlackMagic {
 	namespace Utils {

@@ -1,4 +1,5 @@
 #include "VideoInput.h"
+#include "DeckLink_c.h"
 
 namespace ofxBlackMagic {
 	//---------
