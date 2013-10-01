@@ -24,7 +24,6 @@ ipch/
 
 *.obj
 *.tlog
-*.vcxproj.filters
 *.sdf
 *.pdb
 *.idb

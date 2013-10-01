@@ -2,36 +2,20 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	gui.init();
-	auto deviceList = ofxBlackmagic::Iterator::getDeviceList();
-
+	auto deviceList = ofxBlackMagic::Iterator::getDeviceList();
 	for(auto device : deviceList) {
-		auto input = shared_ptr<ofxBlackmagic::Input>(new ofxBlackmagic::Input());
-
-		static int index = 0;
-		auto mode = index++ == 0 ? bmdModeHD1080p25 : bmdModeHD1080p24;
-		input->startCapture(device, mode);
-		this->inputs.push_back(input);
-
-		auto panel = gui.add(*input, device.modelName);
-		panel->onDraw += [input] (ofxCvGui::DrawArguments&) {
-			if (input->isFrameNew()) {
-				ofxCvGui::AssetRegister.drawText("New frame", 30, 90);
-			}
-		};
+		result << device;
 	}
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	for(auto input : this->inputs) {
-		input->update();
-	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+	ofDrawBitmapString(result.str(), 20, 20);
 }
 
 //--------------------------------------------------------------

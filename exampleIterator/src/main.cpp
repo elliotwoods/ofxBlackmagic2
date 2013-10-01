@@ -1,5 +1,5 @@
-#include "ofApp.h"
 #include "ofMain.h"
+#include "ofApp.h"
 
 //========================================================================
 int main( ){

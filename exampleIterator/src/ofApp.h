@@ -1,8 +1,7 @@
 #pragma once
 
-#include "ofxBlackmagic.h"
-#include "ofxCvGui.h"
 #include "ofMain.h"
+#include "ofxBlackMagic.h"
 
 class ofApp : public ofBaseApp{
 
@@ -20,7 +19,6 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-	
-		vector<shared_ptr<ofxBlackmagic::Input> > inputs;
-		ofxCvGui::Builder gui;
+		
+		stringstream result;
 };

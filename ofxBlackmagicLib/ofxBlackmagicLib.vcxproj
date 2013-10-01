@@ -45,7 +45,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\addons\ofxBlackmagic2\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxBlackmagic2\src;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -57,7 +58,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\addons\ofxBlackmagic2\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxBlackmagic2\src;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -67,20 +68,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ofxBlackMagic.h" />
-    <ClInclude Include="..\src\ofxBlackmagic\DeckLinkAPI\DeckLinkAPI_h.h" />
-    <ClInclude Include="..\src\ofxBlackMagic\DeckLink_c.h" />
-    <ClInclude Include="..\src\ofxBlackMagic\DeckLink_h.h" />
     <ClInclude Include="..\src\ofxBlackMagic\DeviceList.h" />
+    <ClInclude Include="..\src\ofxBlackmagic\Frame.h" />
     <ClInclude Include="..\src\ofxBlackMagic\Iterator.h" />
     <ClInclude Include="..\src\ofxBlackMagic\Utils.h" />
-    <ClInclude Include="..\src\ofxBlackMagic\VideoInput.h" />
+    <ClInclude Include="..\src\ofxBlackMagic\Input.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="DeckLinkAPI_h.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ofxBlackmagic\DeckLinkAPI\DeckLinkAPI_i.c" />
     <ClCompile Include="..\src\ofxBlackMagic\DeviceList.cpp" />
+    <ClCompile Include="..\src\ofxBlackmagic\Frame.cpp" />
     <ClCompile Include="..\src\ofxBlackMagic\Iterator.cpp" />
     <ClCompile Include="..\src\ofxBlackMagic\Utils.cpp" />
-    <ClCompile Include="..\src\ofxBlackMagic\VideoInput.cpp" />
+    <ClCompile Include="..\src\ofxBlackMagic\Input.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DeckLinkAPI_i.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="..\..\..\..\Program Files (x86)\Blackmagic Design\Blackmagic DeckLink SDK 9.7.7\Win\include\DeckLinkAPI.idl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

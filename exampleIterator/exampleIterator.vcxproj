@@ -57,7 +57,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\addons\ofxGrabCam\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxCvGui2\src;..\..\..\addons\ofxBlackmagic2\ofxBlackmagicLib;..\..\..\addons\ofxBlackmagic2\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxBlackmagic2\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -74,7 +74,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>..\..\..\addons\ofxGrabCam\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxCvGui2\src;..\..\..\addons\ofxBlackmagic2\ofxBlackmagicLib;..\..\..\addons\ofxBlackmagic2\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxBlackmagic2\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -98,9 +98,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
       <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ofxCvGui2\ofxCvGuiLib\ofxCvGuiLib.vcxproj">
-      <Project>{6f0ddb4f-4014-4433-919b-9d956c034bad}</Project>
     </ProjectReference>
     <ProjectReference Include="..\ofxBlackmagicLib\ofxBlackmagicLib.vcxproj">
       <Project>{e57be93f-5ba0-4165-8861-df6653f11a37}</Project>

@@ -1,7 +1,6 @@
 #include "Iterator.h"
-#include "DeckLink_c.h"
 
-namespace ofxBlackMagic {
+namespace ofxBlackmagic {
 	//---------
 	DeviceList Iterator::getDeviceList() {
 		IDeckLinkIterator* iterator;

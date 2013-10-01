@@ -7,7 +7,7 @@
 
 class IDeckLink;
 
-namespace ofxBlackMagic {
+namespace ofxBlackmagic {
 	struct DeviceDefinition {
 		IDeckLink* device;
 		std::string modelName;
