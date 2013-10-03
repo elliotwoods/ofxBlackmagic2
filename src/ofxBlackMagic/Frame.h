@@ -10,7 +10,9 @@ namespace ofxBlackmagic {
 	class Frame : IDeckLinkVideoFrame, public ofBaseHasPixels {
 	public:
 		Frame();
+		~Frame();
 		void allocate(int width, int height);
+		void deallocate();
 		void copyFromFrame(IDeckLinkVideoFrame*);
 
 		int getWidth();
@@ -52,6 +54,7 @@ namespace ofxBlackmagic {
 		//--
 
 		ofPixels pixels;
+		unsigned char* data;
 		IDeckLinkVideoFrameAncillary* ancillary;
 		int references;
 	};

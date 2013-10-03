@@ -68,6 +68,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ofxBlackMagic.h" />
+    <ClInclude Include="..\src\ofxBlackMagic\DeckLinkAPI_h.h" />
     <ClInclude Include="..\src\ofxBlackMagic\DeviceList.h" />
     <ClInclude Include="..\src\ofxBlackmagic\Frame.h" />
     <ClInclude Include="..\src\ofxBlackMagic\Iterator.h" />
@@ -76,9 +77,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="DeckLinkAPI_h.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\ofxBlackMagic\DeckLinkAPI_i.c" />
     <ClCompile Include="..\src\ofxBlackMagic\DeviceList.cpp" />
     <ClCompile Include="..\src\ofxBlackmagic\Frame.cpp" />
     <ClCompile Include="..\src\ofxBlackMagic\Iterator.cpp" />
@@ -87,7 +88,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="DeckLinkAPI_i.c" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="..\..\..\..\Program Files (x86)\Blackmagic Design\Blackmagic DeckLink SDK 9.7.7\Win\include\DeckLinkAPI.idl" />

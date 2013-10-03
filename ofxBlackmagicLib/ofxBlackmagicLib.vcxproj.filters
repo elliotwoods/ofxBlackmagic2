@@ -13,8 +13,10 @@
     <ClCompile Include="..\src\ofxBlackMagic\Input.cpp">
       <Filter>src\ofxBlackmagic</Filter>
     </ClCompile>
-    <ClCompile Include="DeckLinkAPI_i.c" />
     <ClCompile Include="..\src\ofxBlackmagic\Frame.cpp">
+      <Filter>src\ofxBlackmagic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxBlackMagic\DeckLinkAPI_i.c">
       <Filter>src\ofxBlackmagic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -34,8 +36,10 @@
     <ClInclude Include="..\src\ofxBlackMagic\Input.h">
       <Filter>src\ofxBlackmagic</Filter>
     </ClInclude>
-    <ClInclude Include="DeckLinkAPI_h.h" />
     <ClInclude Include="..\src\ofxBlackmagic\Frame.h">
+      <Filter>src\ofxBlackmagic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxBlackMagic\DeckLinkAPI_h.h">
       <Filter>src\ofxBlackmagic</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,12 +4,29 @@
 namespace ofxBlackmagic {
 	//----------
 	Frame::Frame() {
+		this->data = 0;
+	}
 
+	//----------
+	Frame::~Frame() {
+		this->deallocate();
 	}
 
 	//----------
 	void Frame::allocate(int width, int height) {
-		this->pixels.allocate(width, height, OF_PIXELS_RGBA);
+		this->deallocate();
+		//we offset to store 1 byte either side of RGB so we can do ARGB and RGBA addressing
+		this->data = new unsigned char[width * height * 4 + 1];
+		this->pixels.setFromExternalPixels(this->data + 1, width, height, 4);
+		*(data + this->pixels.size()) = 255; // set alpha channel of last byte
+	}
+
+	//----------
+	void Frame::deallocate() {
+		if (this->data != 0) {
+			delete[] this->data;
+			this->data = 0;
+		}
 	}
 
 	//----------
@@ -31,7 +48,8 @@ namespace ofxBlackmagic {
 			{
 				void* dataIn;
 				inputFrame->GetBytes(&dataIn);
-				memcpy(this->getPixels(), dataIn, this->GetRowBytes() * this->GetHeight());
+				auto size = this->GetRowBytes() * this->GetHeight();
+				memcpy(this->data, dataIn, size); //offset by 1 ARGB -> RGBA
 			}
 			break;
 		case bmdFormat8BitBGRA:
@@ -95,7 +113,7 @@ namespace ofxBlackmagic {
 
 	//----------
 	HRESULT Frame::GetBytes(void **buffer) {
-		*buffer = this->pixels.getPixels();
+		*buffer = this->data;
 		return S_OK;
 	}
 
