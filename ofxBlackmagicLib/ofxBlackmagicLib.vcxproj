@@ -89,9 +89,6 @@
       </ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <Midl Include="..\..\..\..\Program Files (x86)\Blackmagic Design\Blackmagic DeckLink SDK 9.7.7\Win\include\DeckLinkAPI.idl" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
