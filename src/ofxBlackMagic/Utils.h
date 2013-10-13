@@ -11,7 +11,7 @@
 #define OFXBM_WARNING ofLogWarning(string(__func__))
 #define OFXBM_ERROR ofLogError(string(__func__))
 #define OFXBM_FATAL ofLogFatalError(string(__func__))
-#define CHECK_ERRORS(x, message) if ((x) != S_OK) { throw new std::exception((std::string(__func__) + std::string(": ") +  std::string(message)).c_str()); }
+#define CHECK_ERRORS(x, message) if ((x) != S_OK) { throw std::exception((std::string(__func__) + std::string(": ") +  std::string(message)).c_str()); }
 
 namespace ofxBlackmagic {
 	namespace Utils {
