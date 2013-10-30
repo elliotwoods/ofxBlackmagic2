@@ -21,7 +21,7 @@ namespace ofxBlackmagic {
 
 
 		//--
-		//ofBaseUpdates
+		//IDeckLinkInputCallback
 		//
 		HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) override;
 		HRESULT STDMETHODCALLTYPE VideoInputFrameArrived(IDeckLinkVideoInputFrame*, IDeckLinkAudioInputPacket*) override;
