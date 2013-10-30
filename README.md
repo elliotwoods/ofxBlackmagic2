@@ -20,6 +20,15 @@ This addon has been tested on Windows, but it should also work on OSX and Linux 
 
 On Windows, install BlackMagic Desktop Video (not the SDK), then try out an example.
 
+Designed to work with all DeckLink products, e.g.:
+
+* Intensity Pro/Shuttle/Thunderbolt
+* DeckLink Quad
+* DeckLink SDI
+* UltraStudio 4K
+* UltraStudio Mini Recorder
+* etc
+
 Setting up new projects
 ------------
 
