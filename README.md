@@ -10,7 +10,7 @@ Advantages:
 
 Alternatives:
 
-* http://github.com/jamezilla/ofxBlackmagic 
+* https://github.com/jamezilla/ofxBlackmagic 
 * https://github.com/kylemcdonald/ofxBlackmagic
 
 Installation
