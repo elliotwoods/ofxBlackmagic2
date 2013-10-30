@@ -1,18 +1,26 @@
 ofxBlackmagic2
 ==============
 
-An alternative ofxBlackmagic to http://github.com/jamezilla/ofxBlackmagic 
+Advantages:
 
-License
--------
+* Uses DeckLink SDK for colour conversion (much faster/more efficient than hand-rolled solutions)
+* Designed for use with multiple devices
+* Object oriented with namespaces
+* Lockable frames for threading
 
-MIT License
-http://opensource.org/licenses/MIT
+Alternatives:
 
-Usage
------
+* http://github.com/jamezilla/ofxBlackmagic 
+* https://github.com/kylemcdonald/ofxBlackmagic
 
-This addon is currently coded for Visual Studio 2012 (Windows), but could be used with other platforms if the correct headers are provided to your IDE.
+Installation
+------------
+
+This addon has been tested on Windows, but it should also work on OSX and Linux (by including the DeckLink SDK's for those platforms in your project and ignoring DeckLinkAPI_i.c, DeckLinkAPI_i.h).
+
+On Windows, install BlackMagic Desktop Video (not the SDK), then try out an example.
+
+## Notes for setting up new projects
 
 ### Visual Studio 2012
 
@@ -44,3 +52,10 @@ To do this follow these steps:
 6. Hit `OK` to save
 
 You then must also go to the project properties of your app, go to `Common Properties` on the left hand side, 
+
+
+License
+-------
+
+MIT License
+http://opensource.org/licenses/MIT
