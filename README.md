@@ -20,6 +20,9 @@ This addon has been tested on Windows, but it should also work on OSX and Linux 
 
 On Windows, install BlackMagic Desktop Video (not the SDK), then try out an example.
 
+Setting up new projects
+------------
+
 ### Visual Studio 2012
 
 #### Remove CompileAsCpp
