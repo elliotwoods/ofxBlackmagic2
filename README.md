@@ -1,7 +1,9 @@
 ofxBlackmagic2
 ==============
 
-Advantages:
+<img src="https://raw.github.com/elliotwoods/ofxGrabCam/master/ofxaddons_thumbnail.png" />
+
+Features:
 
 * Uses DeckLink SDK for colour conversion (much faster/more efficient than hand-rolled solutions)
 * Designed for use with multiple devices
