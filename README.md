@@ -6,7 +6,7 @@ ofxBlackmagic2
 Features:
 
 * Uses DeckLink SDK for colour conversion (much faster/more efficient than hand-rolled solutions)
-* Designed for use with multiple devices
+* Designed for use with multiple devices (and devices with multiple inputs, e.g. DeckLink Quad)
 * Object oriented with namespaces
 * Lockable frames for threading
 
