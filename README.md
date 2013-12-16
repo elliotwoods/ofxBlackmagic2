@@ -1,7 +1,7 @@
 ofxBlackmagic2
 ==============
 
-<img src="https://raw.github.com/elliotwoods/ofxGrabCam/master/ofxaddons_thumbnail.png" />
+<img src="https://raw.github.com/elliotwoods/ofxBlackMagic2/master/ofxaddons_thumbnail.png" />
 
 Features:
 
