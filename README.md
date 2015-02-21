@@ -6,7 +6,7 @@ ofxBlackmagic2
 Features:
 
 * Uses DeckLink SDK for colour conversion (much faster/more efficient than hand-rolled solutions)
-* Designed for use with multiple devices
+* Designed for use with multiple devices (and devices with multiple inputs, e.g. DeckLink Quad)
 * Object oriented with namespaces
 * Lockable frames for threading
 
@@ -68,8 +68,29 @@ To do this follow these steps:
 5. Hit the `Add <u>N</u>ew Reference` button and select `ofxBlackmagicLib`
 6. Hit `OK` to save
 
-You then must also go to the project properties of your app, go to `Common Properties` on the left hand side, 
+#### Include Order
 
+ofxBlackmagic2 is a little finicky about the order it is added in, and must be included before everything else in your program.
+
+1. Make sure `ofxBlackMagic2.h` is included above everything else in your `ofApp.h` file (or wherever else you are using it).
+    ```
+    #pragma once
+
+    #include "ofxBlackmagic.h"
+    #include "ofMain.h"
+
+    ...
+    ```
+2. Make sure `ofApp.h` (or whichever file is including the addon) is included above everything else in your `main.cpp` file.
+    ```
+    #include "ofApp.h"
+    #include "ofMain.h"
+
+    //========================================================================
+    int main(){
+        ...
+    }
+    ```
 
 License
 -------
