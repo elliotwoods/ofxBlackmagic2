@@ -5,7 +5,7 @@
 
 #include "Utils.h"
 
-class IDeckLink;
+struct IDeckLink;
 
 namespace ofxBlackmagic {
 	struct DeviceDefinition {

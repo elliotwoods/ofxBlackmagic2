@@ -54,6 +54,11 @@ namespace ofxBlackmagic {
 			break;
 		case bmdFormat8BitBGRA:
 		case bmdFormat10BitYUV:
+		{
+			auto & converter = Utils::CoManagerInstance.getVideoConverter();
+			converter.ConvertFrame(inputFrame, this);
+		}
+			break;
 		case bmdFormat10BitRGB:
 		case bmdFormat10BitRGBXLE:
 		case bmdFormat10BitRGBX:

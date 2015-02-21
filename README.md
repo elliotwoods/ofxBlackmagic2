@@ -31,6 +31,11 @@ Designed to work with all DeckLink products, e.g.:
 * UltraStudio Mini Recorder
 * etc
 
+Warning
+-------
+
+Due to particular type names in DeckLinkAPI.h, ofxBlackMagic.h must be included before ofMain.h (or addons which include ofMain.h) in your ofApp.h (or elsewhere).
+
 Setting up new projects
 ------------
 

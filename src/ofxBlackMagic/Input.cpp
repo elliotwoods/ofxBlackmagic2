@@ -69,13 +69,19 @@ namespace ofxBlackmagic {
 	}
 
 	//---------
-	HRESULT Input::VideoInputFrameArrived(IDeckLinkVideoInputFrame* yuvVideoFrame, IDeckLinkAudioInputPacket* audioFrame) {
-		this->newFrameReady = true;
+	HRESULT Input::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame, IDeckLinkAudioInputPacket* audioFrame) {
+		if (videoFrame == NULL) {
+			return S_OK;
+		}
 
-		if (this->videoFrame.lock.tryLock(100)) {
-			this->videoFrame.copyFromFrame(yuvVideoFrame);
+		if (this->videoFrame.lock.tryLock(500)) {
+			this->videoFrame.copyFromFrame(videoFrame);
 			this->videoFrame.lock.unlock();
 		}
+		else {
+			OFXBM_WARNING << "Cannot copy frame data as videoFrame is locked";
+		}
+
 		return S_OK;
 	}
 
@@ -88,7 +94,7 @@ namespace ofxBlackmagic {
 				this->texture.allocate(this->videoFrame.getWidth(), this->videoFrame.getHeight(), GL_RGBA);
 			}
 
-			if (this->videoFrame.lock.tryLock(10)) {
+			if (this->videoFrame.lock.tryLock(500)) {
 				this->texture.loadData(this->videoFrame.getPixels(), this->getWidth(), this->getHeight(), GL_RGBA);
 				this->videoFrame.lock.unlock();
 			}
