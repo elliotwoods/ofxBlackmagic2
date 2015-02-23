@@ -1,4 +1,5 @@
 #include "Iterator.h"
+#include "ofConstants.h"
 
 namespace ofxBlackmagic {
 	//---------
@@ -6,15 +7,18 @@ namespace ofxBlackmagic {
 		IDeckLinkIterator* iterator;
 		IDeckLink* device;
 		DeviceList deviceList;
+
+		bool haveItererator;
+
+#ifdef TARGET_WIN32
 		auto result = CoCreateInstance(CLSID_CDeckLinkIterator,NULL,CLSCTX_ALL,IID_IDeckLinkIterator,(void**)& iterator);
-		
-			//comment this out if not yet implemented
-			and for mac or linux instead:
-			IDeckLinkIterator *deckLinkIterator = CreateDeckLinkIteratorInstance();
-			where return of NULL means fail
-			also this should be in CoManager not in this cpp
+		haveItererator = result == S_OK;
+#else
+		iterator = CreateDeckLinkIteratorInstance();
+		haveItererator = iterator != NULL
+#endif
 			
-		while(result == S_OK && iterator->Next(&device) == S_OK)
+		while (haveItererator && iterator->Next(&device) == S_OK)
 		{
 			DeviceDefinition deviceDefinition;
 
