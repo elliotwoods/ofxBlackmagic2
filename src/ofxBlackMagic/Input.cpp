@@ -77,6 +77,7 @@ namespace ofxBlackmagic {
 		if (this->videoFrame.lock.tryLock(500)) {
 			this->videoFrame.copyFromFrame(videoFrame);
 			this->videoFrame.lock.unlock();
+			this->newFrameReady = true;
 		}
 		else {
 			OFXBM_WARNING << "Cannot copy frame data as videoFrame is locked";

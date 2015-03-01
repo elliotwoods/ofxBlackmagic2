@@ -15,7 +15,7 @@ void ofApp::setup(){
 		auto input = shared_ptr<ofxBlackmagic::Input>(new ofxBlackmagic::Input());
 
 		static int index = 0;
-		auto mode = bmdMode4K2160p30; // switch this mode to match the resolution/refresh of your input stream
+		auto mode = bmdModeHD1080p30; // switch this mode to match the resolution/refresh of your input stream
 		input->startCapture(device, mode);
 		this->inputs.push_back(input);
 

@@ -17,14 +17,15 @@ namespace ofxBlackmagic {
 				this->videoConverter = nullptr;
 				throw(std::exception("ofxBlackMagic::CoManager : Failed to create video conversion instance"));
 			}
+			else {
+				this->videoConverter->AddRef();
+			}
 		}
 
 		//---------
 		CoManager::~CoManager() {
 			if (this->videoConverter) {
-				//commenting this out until we know why it causes a crash on quit
-				//it's safe to remove this since this is an on quit release
-				//this->videoConverter->Release();
+				this->videoConverter->Release();
 			}
 		}
 

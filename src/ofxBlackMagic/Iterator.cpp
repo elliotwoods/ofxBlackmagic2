@@ -11,6 +11,7 @@ namespace ofxBlackmagic {
 		bool haveItererator;
 
 #ifdef TARGET_WIN32
+		CoInitializeEx(NULL, COINIT_MULTITHREADED);
 		auto result = CoCreateInstance(CLSID_CDeckLinkIterator,NULL,CLSCTX_ALL,IID_IDeckLinkIterator,(void**)& iterator);
 		haveItererator = result == S_OK;
 #else
