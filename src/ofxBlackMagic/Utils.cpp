@@ -13,12 +13,19 @@ namespace ofxBlackmagic {
 			if (FAILED(result)) {
 				throw(std::exception("ofxBlackmagic failed to initialise COM. Now quitting."));
 			}
-			CHECK_ERRORS(CoCreateInstance(CLSID_CDeckLinkVideoConversion, NULL, CLSCTX_ALL, IID_IDeckLinkVideoConversion, (void**)&this->videoConverter), "Failed to create video conversion instance");
+			if (FAILED(CoCreateInstance(CLSID_CDeckLinkVideoConversion, NULL, CLSCTX_ALL, IID_IDeckLinkVideoConversion, (void**)&this->videoConverter))) {
+				this->videoConverter = nullptr;
+				throw(std::exception("ofxBlackMagic::CoManager : Failed to create video conversion instance"));
+			}
 		}
 
 		//---------
 		CoManager::~CoManager() {
-			this->videoConverter->Release();
+			if (this->videoConverter) {
+				//commenting this out until we know why it causes a crash on quit
+				//it's safe to remove this since this is an on quit release
+				//this->videoConverter->Release();
+			}
 		}
 
 		//---------
