@@ -31,6 +31,12 @@ Designed to work with all DeckLink products, e.g.:
 * UltraStudio Mini Recorder
 * etc
 
+Tested with:
+
+* DeckLink Quad
+* Blackmagic Production Camera 4k
+* Intensity Pro
+
 Warning
 -------
 
