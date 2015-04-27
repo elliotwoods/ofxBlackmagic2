@@ -18,7 +18,7 @@ namespace ofxBlackmagic {
 
 		bool isFrameNew() const;
 		DeviceDefinition& getDevice();
-
+		Frame & getFrame();
 
 		//--
 		//IDeckLinkInputCallback

@@ -206,12 +206,12 @@ namespace ofxMachineVision {
 
 		//---------
 		ULONG STDMETHODCALLTYPE DeckLink::Release(void) {
-			int		newRefValue;
+			int	newRefValue;
 
 			newRefValue = InterlockedDecrement((LONG*)&referenceCount);
 			if (newRefValue == 0)
 			{
-				delete this;
+				//delete this;
 				return 0;
 			}
 

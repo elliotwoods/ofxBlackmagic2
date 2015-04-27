@@ -64,6 +64,11 @@ namespace ofxBlackmagic {
 	}
 
 	//---------
+	Frame & Input::getFrame() {
+		return this->videoFrame;
+	}
+
+	//---------
 	HRESULT Input::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents, IDeckLinkDisplayMode* displayMode, BMDDetectedVideoInputFormatFlags) {
 		return S_OK;
 	}

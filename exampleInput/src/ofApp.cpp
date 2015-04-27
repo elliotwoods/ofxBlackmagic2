@@ -35,9 +35,17 @@ void ofApp::setup(){
 
 
 	ofxCvGui::InspectController::X().onClear += [this](ofxCvGui::InspectArguments & args) {
-		args.inspector->add(make_shared<ofxCvGui::Widgets::LiveValueHistory>("FPS", []() {
+		args.inspector->add(ofxCvGui::Widgets::LiveValueHistory::make("FPS", []() {
 			return ofGetFrameRate();
 		}));
+
+		for (auto input : this->inputs) {
+			args.inspector->add(ofxCvGui::Widgets::LiveValue<string>::make("Timecode", [input]() {
+				stringstream ss;
+				ss << input->getFrame().getTimecode();
+				return ss.str();
+			}));
+		}
 	};
 
 	ofxCvGui::InspectController::X().clear();

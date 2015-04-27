@@ -9,14 +9,22 @@ namespace ofxBlackmagic {
 	/// RGB pixels
 	class Frame : IDeckLinkVideoFrame, public ofBaseHasPixels {
 	public:
+		struct Timecode {
+			unsigned char hours;
+			unsigned char minutes;
+			unsigned char seconds;
+			unsigned char frames;
+		};
+
 		Frame();
 		~Frame();
 		void allocate(int width, int height);
 		void deallocate();
 		void copyFromFrame(IDeckLinkVideoFrame*);
 
-		int getWidth();
-		int getHeight();
+		int getWidth() const;
+		int getHeight() const;
+		const Timecode & getTimecode() const;
 
 		ofMutex lock;
 
@@ -54,8 +62,11 @@ namespace ofxBlackmagic {
 		//--
 
 		ofPixels pixels;
+		Timecode timecode;
 		unsigned char* data;
 		IDeckLinkVideoFrameAncillary* ancillary;
 		int references;
 	};
 }
+
+ostream & operator<<(ostream &, const ofxBlackmagic::Frame::Timecode &);

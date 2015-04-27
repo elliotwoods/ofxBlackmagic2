@@ -68,17 +68,33 @@ namespace ofxBlackmagic {
 			break;
 		}
 
+		//get timecode
+		IDeckLinkTimecode * timecode = nullptr;
+		auto result = inputFrame->GetTimecode(BMDTimecodeFormat::bmdTimecodeRP188Any, &timecode);
+		if (result != S_OK) {
+			this->timecode = {
+				0, 0, 0, 0
+			};
+		} else {
+			timecode->GetComponents(&this->timecode.hours, &this->timecode.minutes, &this->timecode.seconds, &this->timecode.frames);
+		}
+
 		//inputFrame->GetAncillaryData(&this->ancillary);
 	}
 	
 	//----------
-	int Frame::getWidth() {
+	int Frame::getWidth() const {
 		return this->pixels.getWidth();
 	}
 
 	//----------
-	int Frame::getHeight() {
+	int Frame::getHeight() const {
 		return this->pixels.getHeight();
+	}
+
+	//----------
+	const Frame::Timecode & Frame::getTimecode() const {
+		return this->timecode;
 	}
 
 	//----------
@@ -148,4 +164,10 @@ namespace ofxBlackmagic {
 		return --this->references;
 	}
 
+}
+
+//----------
+ostream & operator<<(ostream & os, const ofxBlackmagic::Frame::Timecode & timecode) {
+	os << (int) timecode.hours << "h" << (int) timecode.minutes << "m" << (int) timecode.seconds << "s" << (int) timecode.frames;
+	return os;
 }
