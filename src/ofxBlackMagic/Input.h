@@ -43,10 +43,10 @@ namespace ofxBlackmagic {
 		//--
 		//ofBaseDraws
 		//
-		void draw(float x, float y) override;
-		void draw(float x, float y, float w, float h) override;
-		float getWidth() override;
-		float getHeight() override;
+		void draw(float x, float y) const override;
+		void draw(float x, float y, float w, float h) const override;
+		float getWidth() const override;
+		float getHeight() const override;
 		//
 		//--
 
@@ -54,8 +54,8 @@ namespace ofxBlackmagic {
 		//--
 		//ofBaseHasPixels
 		//
-		unsigned char* getPixels() override;
-		ofPixels& getPixelsRef() override;
+		ofPixels& getPixels() override;
+		const ofPixels& getPixels() const override;
 		//
 		//--
 
@@ -63,8 +63,11 @@ namespace ofxBlackmagic {
 		//--
 		//ofBaseHasTexture
 		//
-		ofTexture& getTextureReference() override;
+		ofTexture& getTexture() override;
+		const ofTexture& getTexture() const override;
+
 		void setUseTexture(bool) override;
+		bool isUsingTexture() const override;
 		//
 		//--
 

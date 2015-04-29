@@ -72,22 +72,22 @@ namespace ofxBlackmagic {
 	}
 	
 	//----------
-	int Frame::getWidth() {
+	int Frame::getWidth() const {
 		return this->pixels.getWidth();
 	}
 
 	//----------
-	int Frame::getHeight() {
+	int Frame::getHeight() const {
 		return this->pixels.getHeight();
 	}
 
 	//----------
-	unsigned char* Frame::getPixels() {
-		return this->pixels.getPixels();
+	ofPixels& Frame::getPixels() {
+		return this->pixels;
 	}
 
 	//----------
-	ofPixels& Frame::getPixelsRef() {
+	const ofPixels& Frame::getPixels() const {
 		return this->pixels;
 	}
 
