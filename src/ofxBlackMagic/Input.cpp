@@ -103,42 +103,52 @@ namespace ofxBlackmagic {
 	}
 
 	//---------
-	void Input::draw(float x, float y) {
+	void Input::draw(float x, float y) const {
 		this->draw(x, y, this->getWidth(), this->getHeight());
 	}
 
 	//---------
-	void Input::draw(float x, float y, float w, float h) {
-		this->getTextureReference().draw(x, y, w, h);
+	void Input::draw(float x, float y, float w, float h) const {
+		this->getTexture().draw(x, y, w, h);
 	}
 	
 	//---------
-	float Input::getWidth() {
+	float Input::getWidth() const {
 		return this->videoFrame.getWidth();
 	}
 
 	//---------
-	float Input::getHeight() {
+	float Input::getHeight() const {
 		return this->videoFrame.getHeight();
 	}
 
 	//---------
-	unsigned char* Input::getPixels() {
+	ofPixels& Input::getPixels() {
 		return this->videoFrame.getPixels();
 	}
 
 	//---------
-	ofPixels& Input::getPixelsRef() {
-		return this->videoFrame.getPixelsRef();
+	const ofPixels& Input::getPixels() const {
+		return this->videoFrame.getPixels();
 	}
 
 	//---------
-	ofTexture& Input::getTextureReference() {
+	ofTexture& Input::getTexture() {
+		return this->texture;
+	}
+
+	//---------
+	const ofTexture& Input::getTexture() const {
 		return this->texture;
 	}
 
 	//---------
 	void Input::setUseTexture(bool useTexture) {
 		this->useTexture = useTexture;
+	}
+	
+	//---------
+	bool Input::isUsingTexture() const {
+		return this->useTexture;
 	}
 }
