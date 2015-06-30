@@ -31,8 +31,8 @@ namespace ofxBlackmagic {
 		//--
 		//ofBaseHasPixels
 		//
-		unsigned char* getPixels();
-		ofPixels& getPixelsRef();
+		ofPixels & getPixels() override;
+		const ofPixels & getPixels() const override;
 		//
 		//--
 

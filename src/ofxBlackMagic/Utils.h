@@ -2,6 +2,7 @@
 #include <string>
 #include <wtypes.h>
 #include <string>
+#include <memory>
 
 #include "DeckLinkAPI_h.h"
 
@@ -18,17 +19,18 @@ namespace ofxBlackmagic {
 		//---------
 		class CoManager {
 		public:
+			static CoManager & X();
+
 			CoManager();
 			~CoManager();
 			IDeckLinkVideoConversion& getVideoConverter();
 		protected:
 			IDeckLinkVideoConversion* videoConverter;
+			static std::shared_ptr<CoManager> singleton;
 		};
 
 		//---------
 		std::string BSTRToString(BSTR&);
 
-		//---------
-		extern CoManager CoManagerInstance;
 	}
 }

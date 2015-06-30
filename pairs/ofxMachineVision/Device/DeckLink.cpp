@@ -136,8 +136,8 @@ namespace ofxMachineVision {
 				}
 
 				//check allocation
-				if (this->incomingFrame->getPixelsRef().getWidth() != width || this->incomingFrame->getPixelsRef().getHeight() != height) {
-					this->incomingFrame->getPixelsRef().allocate(width, height, OF_IMAGE_GRAYSCALE);
+				if (this->incomingFrame->getPixels().getWidth() != width || this->incomingFrame->getPixels().getHeight() != height) {
+					this->incomingFrame->getPixels().allocate(width, height, OF_IMAGE_GRAYSCALE);
 				}
 
 				//copy bytes out from frame
@@ -145,7 +145,7 @@ namespace ofxMachineVision {
 				CHECK_ERRORS(videoFrame->GetBytes((void**)& yuvBytes), "Failed to pull bytes from incoming video frame");
 
 				//copy UYVY -> YY
-				auto out = this->incomingFrame->getPixelsRef().getPixels();
+				auto out = this->incomingFrame->getPixels().getPixels();
 				for (int i = 0; i < pixelCount; i++) {
 					//this method seems to be auto-SIMD optimised
 					out[i] = yuvBytes[i * 2 + 1];

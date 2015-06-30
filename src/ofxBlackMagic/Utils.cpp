@@ -5,7 +5,15 @@ namespace ofxBlackmagic {
 	namespace Utils {
 #pragma mark CoManager
 		//---------
-		CoManager CoManagerInstance = CoManager();
+		std::shared_ptr<CoManager> CoManager::singleton = std::shared_ptr<CoManager>();
+
+		//---------
+		CoManager & CoManager::X() {
+			if (!CoManager::singleton) {
+				CoManager::singleton = std::make_shared<CoManager>();
+			}
+			return *CoManager::singleton;
+		}
 
 		//---------
 		CoManager::CoManager() {

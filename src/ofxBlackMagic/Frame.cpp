@@ -40,7 +40,7 @@ namespace ofxBlackmagic {
 		{
 		case bmdFormat8BitYUV:
 			{
-				auto & converter = Utils::CoManagerInstance.getVideoConverter();
+				auto & converter = Utils::CoManager::X().getVideoConverter();
 				converter.ConvertFrame(inputFrame, this);
 			}
 			break;
@@ -55,7 +55,7 @@ namespace ofxBlackmagic {
 		case bmdFormat8BitBGRA:
 		case bmdFormat10BitYUV:
 		{
-			auto & converter = Utils::CoManagerInstance.getVideoConverter();
+			auto & converter = Utils::CoManager::X().getVideoConverter();
 			converter.ConvertFrame(inputFrame, this);
 		}
 			break;
@@ -98,12 +98,12 @@ namespace ofxBlackmagic {
 	}
 
 	//----------
-	unsigned char* Frame::getPixels() {
-		return this->pixels.getPixels();
+	ofPixels & Frame::getPixels() {
+		return this->pixels;
 	}
 
 	//----------
-	ofPixels& Frame::getPixelsRef() {
+	const ofPixels & Frame::getPixels() const {
 		return this->pixels;
 	}
 

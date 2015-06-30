@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{53695f24-0430-4196-b53c-3cce472d160b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pairs">
+      <UniqueIdentifier>{a79848cb-62a7-4bd1-bfb2-f5b6b006ceb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pairs\ofxMachineVision">
+      <UniqueIdentifier>{9e88d073-7b1e-4cce-b236-d00c86e34496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pairs\ofxMachineVision\Device">
+      <UniqueIdentifier>{552e243f-3524-444f-b4ba-b26d85a8c5f2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\plugin.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pairs\ofxMachineVision\Device\DeckLink.cpp">
+      <Filter>src\pairs\ofxMachineVision\Device</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\pairs\ofxMachineVision\Device\DeckLink.h">
+      <Filter>src\pairs\ofxMachineVision\Device</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
