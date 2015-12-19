@@ -62,7 +62,7 @@ namespace ofxBlackmagic {
 		case bmdFormat10BitRGB:
 		case bmdFormat10BitRGBXLE:
 		case bmdFormat10BitRGBX:
-			throw(std::exception("Format not supported yet"));
+			throw(std::runtime_error("Format not supported yet"));
 			break;
 		default:
 			break;
@@ -70,7 +70,11 @@ namespace ofxBlackmagic {
 
 		//get timecode
 		IDeckLinkTimecode * timecode = nullptr;
+#if defined(_WIN32)
 		auto result = inputFrame->GetTimecode(BMDTimecodeFormat::bmdTimecodeRP188Any, &timecode);
+#elif defined(__APPLE_CC__)
+		auto result = inputFrame->GetTimecode(_BMDTimecodeFormat::bmdTimecodeRP188Any, &timecode);
+#endif
 		if (result != S_OK) {
 			this->timecode = {
 				0, 0, 0, 0
@@ -140,7 +144,7 @@ namespace ofxBlackmagic {
 
 	//----------
 	HRESULT Frame::GetTimecode(BMDTimecodeFormat format, IDeckLinkTimecode **timecode) {
-		throw(std::exception("GetTimecode feature not supported at present"));
+		throw(std::runtime_error("GetTimecode feature not supported at present"));
 	}
 
 	//----------
@@ -150,9 +154,16 @@ namespace ofxBlackmagic {
 	}
 
 	//----------
+#if defined(_WIN32)
 	HRESULT Frame::QueryInterface(REFIID riid, _COM_Outptr_ void __RPC_FAR *__RPC_FAR *ppvObject) {
 		return S_OK;
 	}
+#elif defined(__APPLE_CC__)
+	HRESULT Frame::QueryInterface(REFIID iid, LPVOID *ppv) {
+		return S_OK;
+	}
+#endif
+
 
 	//----------
 	ULONG Frame::AddRef() {

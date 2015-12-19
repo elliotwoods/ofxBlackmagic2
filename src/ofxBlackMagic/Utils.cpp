@@ -1,4 +1,5 @@
 #include "Utils.h"
+
 #include <iostream>
 
 namespace ofxBlackmagic {
@@ -17,6 +18,7 @@ namespace ofxBlackmagic {
 
 		//---------
 		CoManager::CoManager() {
+#if defined(_WIN32)
 			auto result = CoInitialize(NULL);
 			if (FAILED(result)) {
 				throw(std::exception("ofxBlackmagic failed to initialise COM. Now quitting."));
@@ -28,6 +30,10 @@ namespace ofxBlackmagic {
 			else {
 				this->videoConverter->AddRef();
 			}
+			
+#elif defined(__APPLE_CC__)
+			videoConverter = CreateVideoConversionInstance();
+#endif
 		}
 
 		//---------
@@ -44,9 +50,16 @@ namespace ofxBlackmagic {
 
 #pragma mark functions
 		//---------
-		std::string BSTRToString(BSTR& input) {
+		
+#if defined(_WIN32)
+		std::string toString(BSTR& input) {
 			auto longVersion = std::wstring(input);
 			return std::string(longVersion.begin(), longVersion.end());
 		}
+#elif defined(__APPLE_CC__)
+		std::string toString(CFStringRef input) {
+			return CFStringGetCStringPtr(input, kCFStringEncodingUTF8);
+		}
+#endif
 	}
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "DeckLinkAPI_h.h"
+
 #include "Utils.h"
 #include "ofPixels.h"
 #include "ofBaseTypes.h"
@@ -55,7 +55,11 @@ namespace ofxBlackmagic {
 		//--
 		//IUnknown
 		//
+#if defined(_WIN32)
 		HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, _COM_Outptr_ void __RPC_FAR *__RPC_FAR *ppvObject);
+#elif defined(__APPLE_CC__)
+		HRESULT STDMETHODCALLTYPE QueryInterface(REFIID iid, LPVOID *ppv);
+#endif
 		ULONG STDMETHODCALLTYPE AddRef();
 		ULONG STDMETHODCALLTYPE Release();
 		//
