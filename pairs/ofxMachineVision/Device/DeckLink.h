@@ -10,8 +10,8 @@ namespace ofxMachineVision {
 			DeckLink();
 			string getTypeName() const override;
 
-			void setDisplayMode(BMDDisplayMode);
-			BMDDisplayMode getDisplayMode() const;
+			void setDisplayMode(_BMDDisplayMode);
+			_BMDDisplayMode getDisplayMode() const;
 
 			Specification open(int deviceID) override;
 			void close() override;
@@ -19,11 +19,15 @@ namespace ofxMachineVision {
 			void stopCapture() override;
 
 			// IDeckLinkInputCallback interface
+#if defined(_WIN32)
 			HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) override;
+#elif defined(__APPLE_CC__)
+			HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(BMDVideoInputFormatChangedEvents notificationEvents, IDeckLinkDisplayMode *newDisplayMode, BMDDetectedVideoInputFormatFlags detectedSignalFlags) override;
+#endif
 			HRESULT STDMETHODCALLTYPE VideoInputFrameArrived(IDeckLinkVideoInputFrame*, IDeckLinkAudioInputPacket*) override;
 
 			// IUnknown interface
-			HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, _COM_Outptr_ void __RPC_FAR *__RPC_FAR *ppvObject) override;
+			HRESULT STDMETHODCALLTYPE QueryInterface(REFIID iid, LPVOID *ppv) override;
 			ULONG STDMETHODCALLTYPE AddRef(void) override;
 			ULONG STDMETHODCALLTYPE Release(void) override;
 		protected:
@@ -34,8 +38,12 @@ namespace ofxMachineVision {
 			ofxBlackmagic::DeviceDefinition device;
 			BMDDisplayMode displayMode;
 			IDeckLinkInput * input;
-
+			
+#if defined(_WIN32)
 			ULONG referenceCount;
+#elif defined(__APPLE_CC__)
+			int32_t referenceCount;
+			#endif
 		};
 	}
 }

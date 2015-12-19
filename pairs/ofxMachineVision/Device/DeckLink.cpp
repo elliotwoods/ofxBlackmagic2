@@ -1,6 +1,8 @@
 #include "DeckLink.h"
 #include "ofAppGLFWWindow.h"
 
+#include "../../../addons/ofxBlackMagic2/src/ofxBlackMagic/Utils.h"
+
 namespace ofxMachineVision {
 	namespace Device {
 		//----------
@@ -26,7 +28,7 @@ namespace ofxMachineVision {
 
 		//----------
 		_BMDDisplayMode DeckLink::getDisplayMode() const {
-			return this->displayMode;
+			return (_BMDDisplayMode)this->displayMode;
 		}
 
 		//----------
@@ -36,10 +38,10 @@ namespace ofxMachineVision {
 				throw(ofxMachineVision::Exception("No DeckLink devices available"));
 			}
 			if (devices.size() <= (unsigned int)deviceID) {
-				throw(ofxMachineVision::Exception("deviceID [" + ofToString(deviceID) + "] out of range. [" + ofToString(devices.size()) + "] devices available"));
+				string str = "deviceID [" + ofToString(deviceID) + "] out of range. [" + ofToString(devices.size()) + "] devices available";
+				throw(ofxMachineVision::Exception(str));
 			}
 			this->device = devices[deviceID];
-
 			int width, height;
 
 			try {
@@ -111,9 +113,15 @@ namespace ofxMachineVision {
 		}
 
 		//---------
-		HRESULT DeckLink::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents, IDeckLinkDisplayMode* displayMode, BMDDetectedVideoInputFormatFlags) {
+#if defined(_WIN32)
+		HRESULT STDMETHODCALLTYPE DeckLink::VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) {
 			return S_OK;
 		}
+#elif defined(__APPLE_CC__)
+		HRESULT STDMETHODCALLTYPE DeckLink::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents notificationEvents, IDeckLinkDisplayMode *newDisplayMode, BMDDetectedVideoInputFormatFlags detectedSignalFlags) {
+			return S_OK;
+		}
+#endif
 
 		//---------
 		HRESULT DeckLink::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame, IDeckLinkAudioInputPacket* audioFrame) {
@@ -177,6 +185,7 @@ namespace ofxMachineVision {
 			*ppv = NULL;
 
 			// Obtain the IUnknown interface and compare it the provided REFIID
+#if defined(_WIN32)
 			if (iid == IID_IUnknown)
 			{
 				*ppv = this;
@@ -195,11 +204,27 @@ namespace ofxMachineVision {
 				AddRef();
 				result = S_OK;
 			}
-
+#elif defined(__APPLE_CC__)
+#define CompareREFIID(iid1, iid2)	(memcmp(&iid1, &iid2, sizeof(REFIID)) == 0)
+			CFUUIDBytes iunknown = CFUUIDGetUUIDBytes(IUnknownUUID);
+			if (CompareREFIID(iid, iunknown))
+			{
+				*ppv = this;
+				AddRef();
+				result = S_OK;
+			}
+			else if (CompareREFIID(iid, IID_IDeckLinkInputCallback))
+			{
+				*ppv = (IDeckLinkInputCallback*)this;
+				AddRef();
+				result = S_OK;
+			}
+#endif
 			return result;
 		}
 
 		//---------
+#if defined(_WIN32)
 		ULONG STDMETHODCALLTYPE DeckLink::AddRef(void) {
 			return InterlockedIncrement((LONG*)&referenceCount);
 		};
@@ -217,5 +242,24 @@ namespace ofxMachineVision {
 
 			return newRefValue;
 		};
+#elif defined(__APPLE_CC__)
+		ULONG STDMETHODCALLTYPE DeckLink::AddRef(void) {
+			return OSAtomicIncrement32(&referenceCount);
+		};
+		
+		//---------
+		ULONG STDMETHODCALLTYPE DeckLink::Release(void) {
+			int32_t		newRefValue;
+			
+			newRefValue = OSAtomicDecrement32(&referenceCount);
+			if (newRefValue == 0)
+			{
+				delete this;
+				return 0;
+			}
+			
+			return newRefValue;
+		};
+#endif
 	}
 }
