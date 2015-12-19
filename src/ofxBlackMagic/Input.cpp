@@ -25,7 +25,7 @@ namespace ofxBlackmagic {
 			CHECK_ERRORS(this->input->EnableVideoInput(format, bmdFormat8BitYUV, 0), "Failed to enable video input");
 			CHECK_ERRORS(this->input->StartStreams(), "Failed to start streams");
 			this->state = Running;
-		} catch(std::exception e) {
+		} catch(std::exception& e) {
 			OFXBM_ERROR << e.what();
 			this->state = Waiting;
 		}
@@ -69,10 +69,16 @@ namespace ofxBlackmagic {
 	}
 
 	//---------
-	HRESULT Input::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents, IDeckLinkDisplayMode* displayMode, BMDDetectedVideoInputFormatFlags) {
+#if defined(_WIN32)
+	HRESULT STDMETHODCALLTYPE Input::VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) {
 		return S_OK;
 	}
-
+#elif defined(__APPLE_CC__)
+	HRESULT STDMETHODCALLTYPE Input::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents notificationEvents, IDeckLinkDisplayMode *newDisplayMode, BMDDetectedVideoInputFormatFlags detectedSignalFlags) {
+		return S_OK;
+	}
+#endif
+	
 	//---------
 	HRESULT Input::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame, IDeckLinkAudioInputPacket* audioFrame) {
 		if (videoFrame == NULL) {

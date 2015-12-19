@@ -1,10 +1,14 @@
 #pragma once
-#include <string>
+
+#if defined(_WIN32)
+#include "DeckLinkAPI_h.h"
 #include <wtypes.h>
+#elif defined(__APPLE_CC__)
+#include "DeckLinkAPI.h"
+#endif
+
 #include <string>
 #include <memory>
-
-#include "DeckLinkAPI_h.h"
 
 #ifndef __func__
 #define __func__ __FUNCTION__
@@ -12,7 +16,7 @@
 #define OFXBM_WARNING ofLogWarning(string(__func__))
 #define OFXBM_ERROR ofLogError(string(__func__))
 #define OFXBM_FATAL ofLogFatalError(string(__func__))
-#define CHECK_ERRORS(x, message) if ((x) != S_OK) { throw std::exception((std::string(__func__) + std::string(": ") +  std::string(message)).c_str()); }
+#define CHECK_ERRORS(x, message) if ((x) != S_OK) { throw std::runtime_error((std::string(__func__) + std::string(": ") +  std::string(message)).c_str()); }
 
 namespace ofxBlackmagic {
 	namespace Utils {
@@ -30,7 +34,10 @@ namespace ofxBlackmagic {
 		};
 
 		//---------
-		std::string BSTRToString(BSTR&);
-
+#if defined(_WIN32)
+		std::string toString(BSTR&);
+#elif defined(__APPLE_CC__)
+		std::string toString(CFStringRef);
+#endif
 	}
 }

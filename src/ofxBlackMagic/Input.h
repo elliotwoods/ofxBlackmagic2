@@ -1,5 +1,5 @@
 #pragma once
-#include "DeckLinkAPI_h.h"
+
 #include "Utils.h"
 #include "Frame.h"
 
@@ -23,9 +23,20 @@ namespace ofxBlackmagic {
 		//--
 		//IDeckLinkInputCallback
 		//
+#if defined(_WIN32)
 		HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) override;
+#elif defined(__APPLE_CC__)
+		HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(BMDVideoInputFormatChangedEvents notificationEvents, IDeckLinkDisplayMode *newDisplayMode, BMDDetectedVideoInputFormatFlags detectedSignalFlags) override;
+#endif
+
 		HRESULT STDMETHODCALLTYPE VideoInputFrameArrived(IDeckLinkVideoInputFrame*, IDeckLinkAudioInputPacket*) override;
+		
+#if defined(_WIN32)
 		HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, _COM_Outptr_ void __RPC_FAR *__RPC_FAR *ppvObject) override { return S_OK; };
+#elif defined(__APPLE_CC__)
+		HRESULT STDMETHODCALLTYPE QueryInterface(REFIID iid, LPVOID *ppv) override { return S_OK; };
+#endif
+
 		ULONG STDMETHODCALLTYPE AddRef(void) override { return ++referenceCount; };
 		ULONG STDMETHODCALLTYPE Release(void) override { return --referenceCount; };
 		//

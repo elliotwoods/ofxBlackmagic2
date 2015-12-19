@@ -16,19 +16,21 @@ namespace ofxBlackmagic {
 		haveItererator = result == S_OK;
 #else
 		iterator = CreateDeckLinkIteratorInstance();
-		haveItererator = iterator != NULL
+		haveItererator = iterator != NULL;
 #endif
 			
 		while (haveItererator && iterator->Next(&device) == S_OK)
 		{
 			DeviceDefinition deviceDefinition;
 
+#ifdef TARGET_WIN32
 			BSTR modelName;
-
+#elif defined(TARGET_OSX)
+			CFStringRef modelName;
+#endif
 			device->GetModelName(&modelName);
-
 			deviceDefinition.device = device;
-			deviceDefinition.modelName = Utils::BSTRToString(modelName); 
+			deviceDefinition.modelName = Utils::toString(modelName);
 			deviceList.push_back(deviceDefinition);
 		}
 		return deviceList;
