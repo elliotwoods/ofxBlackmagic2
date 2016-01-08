@@ -1,10 +1,10 @@
 #pragma once
 
 #if defined(_WIN32)
-#include "DeckLinkAPI_h.h"
+#include "vs/DeckLinkAPI_h.h"
 #include <wtypes.h>
 #elif defined(__APPLE_CC__)
-#include "DeckLinkAPI.h"
+#include "osx/DeckLinkAPI.h"
 #endif
 
 #include <string>

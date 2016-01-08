@@ -16,8 +16,8 @@
     <ClCompile Include="..\src\ofxBlackmagic\Frame.cpp">
       <Filter>src\ofxBlackmagic</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ofxBlackMagic\DeckLinkAPI_i.c">
-      <Filter>src\ofxBlackmagic</Filter>
+    <ClCompile Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_i.c">
+      <Filter>src\ofxBlackmagic\vs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,8 +39,8 @@
     <ClInclude Include="..\src\ofxBlackmagic\Frame.h">
       <Filter>src\ofxBlackmagic</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ofxBlackMagic\DeckLinkAPI_h.h">
-      <Filter>src\ofxBlackmagic</Filter>
+    <ClInclude Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_h.h">
+      <Filter>src\ofxBlackmagic\vs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +49,9 @@
     </Filter>
     <Filter Include="src\ofxBlackmagic">
       <UniqueIdentifier>{849111ad-87a6-4ce2-aff6-582c94989532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ofxBlackmagic\vs">
+      <UniqueIdentifier>{1bb11228-a596-448b-83e9-9ca60ebec8d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

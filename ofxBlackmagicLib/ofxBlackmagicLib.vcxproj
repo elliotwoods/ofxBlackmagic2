@@ -132,7 +132,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ofxBlackMagic.h" />
-    <ClInclude Include="..\src\ofxBlackMagic\DeckLinkAPI_h.h" />
     <ClInclude Include="..\src\ofxBlackMagic\DeviceList.h" />
     <ClInclude Include="..\src\ofxBlackmagic\Frame.h" />
     <ClInclude Include="..\src\ofxBlackMagic\Iterator.h" />
@@ -143,9 +142,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_h.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ofxBlackMagic\DeckLinkAPI_i.c" />
     <ClCompile Include="..\src\ofxBlackMagic\DeviceList.cpp" />
     <ClCompile Include="..\src\ofxBlackmagic\Frame.cpp" />
     <ClCompile Include="..\src\ofxBlackMagic\Iterator.cpp" />
@@ -156,6 +155,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_i.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
