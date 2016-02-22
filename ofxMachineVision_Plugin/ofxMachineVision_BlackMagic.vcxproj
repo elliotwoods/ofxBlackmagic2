@@ -60,28 +60,28 @@
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
     <Import Project="..\..\..\addons\ofxPlugin\ofxPluginLib\ofxPlugin.props" />
     <Import Project="..\ofxBlackMagicLib\ofxBlackMagic.props" />
-    <Import Project="..\..\ofxMachineVision\ofxMachineVisionLib\ofxMachineVision.props" />
+    <Import Project="..\..\..\addons\ofxMachineVision\ofxMachineVisionLib\ofxMachineVision.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
     <Import Project="..\..\..\addons\ofxPlugin\ofxPluginLib\ofxPlugin.props" />
     <Import Project="..\ofxBlackMagicLib\ofxBlackMagic.props" />
-    <Import Project="..\..\ofxMachineVision\ofxMachineVisionLib\ofxMachineVision.props" />
+    <Import Project="..\..\..\addons\ofxMachineVision\ofxMachineVisionLib\ofxMachineVision.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
     <Import Project="..\..\..\addons\ofxPlugin\ofxPluginLib\ofxPlugin.props" />
     <Import Project="..\ofxBlackMagicLib\ofxBlackMagic.props" />
-    <Import Project="..\..\ofxMachineVision\ofxMachineVisionLib\ofxMachineVision.props" />
+    <Import Project="..\..\..\addons\ofxMachineVision\ofxMachineVisionLib\ofxMachineVision.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
     <Import Project="..\..\..\addons\ofxPlugin\ofxPluginLib\ofxPlugin.props" />
     <Import Project="..\ofxBlackMagicLib\ofxBlackMagic.props" />
-    <Import Project="..\..\ofxMachineVision\ofxMachineVisionLib\ofxMachineVision.props" />
+    <Import Project="..\..\..\addons\ofxMachineVision\ofxMachineVisionLib\ofxMachineVision.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -137,7 +137,7 @@
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
       <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\ofxMachineVision\ofxMachineVisionLib\ofxMachineVisionLib.vcxproj">
+    <ProjectReference Include="..\..\..\addons\ofxMachineVision\ofxMachineVisionLib\ofxMachineVisionLib.vcxproj">
       <Project>{cd4455e0-0454-4c3c-bb42-9d15d16a34dd}</Project>
     </ProjectReference>
     <ProjectReference Include="..\ofxBlackMagicLib\ofxBlackMagicLib.vcxproj">

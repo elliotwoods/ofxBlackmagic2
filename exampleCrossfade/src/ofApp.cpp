@@ -5,6 +5,11 @@ void ofApp::setup(){
 	gui.init();
 	auto deviceList = ofxBlackmagic::Iterator::getDeviceList();
 
+	if (deviceList.size() < 2) {
+		ofSystemAlertDialog("We require at least 2 BlackMagic input devices to test this example");
+		ofExit();
+	}
+
 	A.startCapture(deviceList[0], bmdModePAL);
 	B.startCapture(deviceList[1], bmdModePAL);
 	mix.allocate(1920, 1080, GL_RGBA);

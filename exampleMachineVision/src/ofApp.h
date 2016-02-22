@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DeckLinkDevice.h"
+#include "ofxMachineVision/Device/DeckLink.h"
 #include "ofxMachineVision.h"
 #include "ofxCvGui.h"
 #include "ofMain.h"
@@ -22,6 +22,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 	
-		ofxMachineVision::SimpleGrabber<ofxMachineVision::Device::DeckLinkDevice> grabber;
+		ofxMachineVision::SimpleGrabber<ofxMachineVision::Device::DeckLink> grabber;
 		ofxCvGui::Builder gui;
 };

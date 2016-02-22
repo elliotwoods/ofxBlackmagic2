@@ -3,14 +3,14 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="..\src_ofxMachineVision\DeckLinkDevice.cpp">
-      <Filter>pairs\ofxBlackMagic2\ofxMachineVision</Filter>
+    <ClCompile Include="..\pairs\ofxMachineVision\Device\DeckLink.cpp">
+      <Filter>pairs\ofxMachineVision\Device</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="..\src_ofxMachineVision\DeckLinkDevice.h">
-      <Filter>pairs\ofxBlackMagic2\ofxMachineVision</Filter>
+    <ClInclude Include="..\pairs\ofxMachineVision\Device\DeckLink.h">
+      <Filter>pairs\ofxMachineVision\Device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -20,11 +20,11 @@
     <Filter Include="pairs">
       <UniqueIdentifier>{139c8c86-2e1d-42e6-8c12-7c2998006d5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="pairs\ofxBlackMagic2">
-      <UniqueIdentifier>{a8afc873-c92e-4cca-bb68-998872656652}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="pairs\ofxBlackMagic2\ofxMachineVision">
+    <Filter Include="pairs\ofxMachineVision">
       <UniqueIdentifier>{58383a49-bbfe-49b5-82f6-01dacc663134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pairs\ofxMachineVision\Device">
+      <UniqueIdentifier>{4d73a8c6-2897-4594-a0b5-24d7a13f3f03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

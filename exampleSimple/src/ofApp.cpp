@@ -27,6 +27,7 @@ void ofApp::update(){
 void ofApp::draw(){
 	float x = 0; float y = 0;
 	float width = 1920 / 2; float height = 1080 / 2;
+
 	for(auto input : this->inputs) {
 		input->draw(x, y, width, height);
 		x += width;
@@ -34,6 +35,10 @@ void ofApp::draw(){
 			x = 0;
 			y += ofGetHeight();
 		}
+	}
+
+	if (this->inputs.empty()) {
+		ofDrawBitmapString("No BlackMagic input devices found", 20, 20);
 	}
 }
 

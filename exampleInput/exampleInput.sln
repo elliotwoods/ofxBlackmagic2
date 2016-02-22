@@ -8,7 +8,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "openframeworksLib", "..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ofxBlackmagicLib", "..\ofxBlackmagicLib\ofxBlackmagicLib.vcxproj", "{E57BE93F-5BA0-4165-8861-DF6653F11A37}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ofxCvGuiLib", "..\..\ofxCvGui\ofxCvGuiLib\ofxCvGuiLib.vcxproj", "{6F0DDB4F-4014-4433-919B-9D956C034BAD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ofxCvGuiLib", "..\..\..\addons\ofxCvGui\ofxCvGuiLib\ofxCvGuiLib.vcxproj", "{6F0DDB4F-4014-4433-919B-9D956C034BAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

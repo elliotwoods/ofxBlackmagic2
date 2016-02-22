@@ -1,7 +1,7 @@
 #include "DeckLink.h"
 #include "ofAppGLFWWindow.h"
 
-#include "../../../addons/ofxBlackMagic2/src/ofxBlackMagic/Utils.h"
+#include "ofxBlackMagic/Utils.h"
 
 namespace ofxMachineVision {
 	namespace Device {

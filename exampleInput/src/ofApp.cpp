@@ -3,7 +3,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofSetVerticalSync(true); // this seems to have no effect on windows/64/glfw currently
+	ofSetVerticalSync(true);
 	ofSetFrameRate(60);
 
 	gui.init();
@@ -31,22 +31,19 @@ void ofApp::setup(){
 		rootGrid->add(panel);
 	}
 
-	gui.addInspector();
+	auto widgets = gui.addWidgets();
 
+	widgets->addLiveValueHistory("FPS", []() {
+		return ofGetFrameRate();
+	});
 
-	ofxCvGui::InspectController::X().onClear += [this](ofxCvGui::InspectArguments & args) {
-		args.inspector->add(ofxCvGui::Widgets::LiveValueHistory::make("FPS", []() {
-			return ofGetFrameRate();
-		}));
-
-		for (auto input : this->inputs) {
-			args.inspector->add(ofxCvGui::Widgets::LiveValue<string>::make("Timecode", [input]() {
-				stringstream ss;
-				ss << input->getFrame().getTimecode();
-				return ss.str();
-			}));
-		}
-	};
+	for (auto input : this->inputs) {
+		widgets->addLiveValue<string>("Timecode", [input]() {
+			stringstream ss;
+			ss << input->getFrame().getTimecode();
+			return ss.str();
+		});
+	}
 
 	ofxCvGui::InspectController::X().clear();
 }
