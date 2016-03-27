@@ -1,19 +1,31 @@
 #pragma once
 
-#include "../../../addons/ofxBlackMagic2/src/ofxBlackMagic.h"
-#include "../../../addons/ofxMachineVision/src/ofxMachineVision/Device/Callback.h"
+#include "ofxBlackMagic.h"
+#include "ofxMachineVision/Device/Callback.h"
 
 namespace ofxMachineVision {
 	namespace Device {
 		class DeckLink : public ofxMachineVision::Device::Callback, public IDeckLinkInputCallback {
 		public:
+			struct InitialisationSettings : Base::InitialisationSettings {
+			public:
+				InitialisationSettings() {
+					add(displayMode.set("Display Mode", bmdModeHD1080p30));
+				}
+
+				ofParameter<uint32_t> displayMode;
+			};
+
 			DeckLink();
 			string getTypeName() const override;
+			shared_ptr<Base::InitialisationSettings> getDefaultSettings() override {
+				return make_shared<InitialisationSettings>();
+			}
 
 			void setDisplayMode(_BMDDisplayMode);
 			_BMDDisplayMode getDisplayMode() const;
 
-			Specification open(int deviceID) override;
+			Specification open(shared_ptr<Base::InitialisationSettings> = nullptr) override;
 			void close() override;
 			bool startCapture() override;
 			void stopCapture() override;
@@ -36,7 +48,7 @@ namespace ofxMachineVision {
 			ofxMachineVision::Microseconds openTime;
 
 			ofxBlackmagic::DeviceDefinition device;
-			BMDDisplayMode displayMode;
+			BMDDisplayMode displayMode = bmdModeHD1080p30;
 			IDeckLinkInput * input;
 			
 #if defined(_WIN32)

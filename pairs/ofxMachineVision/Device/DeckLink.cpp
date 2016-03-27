@@ -9,7 +9,6 @@ namespace ofxMachineVision {
 		DeckLink::DeckLink() {
 			this->input = nullptr;
 			this->referenceCount = 0;
-			this->displayMode = bmdModeHD1080p30;
 
 			this->openTime = 0;
 			this->frameIndex = 0;
@@ -22,27 +21,26 @@ namespace ofxMachineVision {
 		}
 
 		//----------
-		void DeckLink::setDisplayMode(_BMDDisplayMode displayMode) {
-			this->displayMode = displayMode;
-		}
-
-		//----------
 		_BMDDisplayMode DeckLink::getDisplayMode() const {
 			return (_BMDDisplayMode)this->displayMode;
 		}
 
 		//----------
-		Specification DeckLink::open(int deviceID) {
+		Specification DeckLink::open(shared_ptr<Base::InitialisationSettings> initialisationSettings) {
+			auto settings = this->getTypedSettings<InitialisationSettings>(initialisationSettings);
+
 			auto devices = ofxBlackmagic::Iterator::getDeviceList();
 			if (devices.empty()) {
 				throw(ofxMachineVision::Exception("No DeckLink devices available"));
 			}
-			if (devices.size() <= (unsigned int)deviceID) {
-				string str = "deviceID [" + ofToString(deviceID) + "] out of range. [" + ofToString(devices.size()) + "] devices available";
+			if (devices.size() <= (unsigned int)settings->deviceID) {
+				string str = "deviceID [" + ofToString(settings->deviceID) + "] out of range. [" + ofToString(devices.size()) + "] devices available";
 				throw(ofxMachineVision::Exception(str));
 			}
-			this->device = devices[deviceID];
+			this->device = devices[settings->deviceID];
 			int width, height;
+
+			this->displayMode = static_cast<_BMDDisplayMode>(settings->displayMode.get());
 
 			try {
 				CHECK_ERRORS(device.device->QueryInterface(IID_IDeckLinkInput, (void**)&this->input), "Failed to query interface");
