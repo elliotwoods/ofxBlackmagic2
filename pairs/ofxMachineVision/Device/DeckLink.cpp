@@ -159,6 +159,7 @@ namespace ofxMachineVision {
 
 				this->incomingFrame->setTimestamp(ofGetElapsedTimeMicros() - this->openTime);
 				this->incomingFrame->setFrameIndex(this->frameIndex++);
+				this->incomingFrame->setEmpty(false);
 
 				this->incomingFrame->unlock();
 
