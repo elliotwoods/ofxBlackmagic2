@@ -22,7 +22,10 @@ namespace ofxBlackmagic {
 			this->device = device;
 			CHECK_ERRORS(device.device->QueryInterface(IID_IDeckLinkInput, (void**)&this->input), "Failed to query interface");
 			CHECK_ERRORS(this->input->SetCallback(this), "Failed to set input callback");
-			CHECK_ERRORS(this->input->EnableVideoInput(format, bmdFormat8BitYUV, 0), "Failed to enable video input");
+			BMDVideoInputFlags videoInputFlags;
+			// Enable input video mode detection if the device supports it
+			videoInputFlags = bmdVideoInputEnableFormatDetection;
+			CHECK_ERRORS(this->input->EnableVideoInput(format, bmdFormat8BitYUV, videoInputFlags), "Failed to enable video input");
 			CHECK_ERRORS(this->input->StartStreams(), "Failed to start streams");
 			this->state = Running;
 		} catch(std::exception& e) {
@@ -70,8 +73,36 @@ namespace ofxBlackmagic {
 
 	//---------
 #if defined(_WIN32)
-	HRESULT STDMETHODCALLTYPE Input::VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) {
-		return S_OK;
+	HRESULT STDMETHODCALLTYPE Input::VideoInputFormatChanged(/* in */ BMDVideoInputFormatChangedEvents notificationEvents, /* in */ IDeckLinkDisplayMode *newMode, /* in */ BMDDetectedVideoInputFormatFlags detectedSignalFlags) {
+				bool shouldRestartCaptureWithNewVideoMode = true;
+
+				BMDPixelFormat	pixelFormat = bmdFormat10BitYUV;
+
+				if (detectedSignalFlags & bmdDetectedVideoInputRGB444) {
+					pixelFormat = bmdFormat10BitRGB;
+				}
+
+				// Restart capture with the new video mode if told to
+				if (shouldRestartCaptureWithNewVideoMode) {
+					// Stop the capture
+					input->StopStreams();
+
+					// Set the video input mode
+					if (input->EnableVideoInput(newMode->GetDisplayMode(), pixelFormat, bmdVideoInputEnableFormatDetection) != S_OK) {
+						ofLogError("This application was unable to select the new video mode.");
+						goto bail;
+					}
+
+					// Start the capture
+					if (input->StartStreams() != S_OK) {
+						ofLogError("This application was unable to start the capture on the selected device.");
+						goto bail;
+					}
+
+				}
+
+			bail:
+				return S_OK;
 	}
 #elif defined(__APPLE_CC__)
 	HRESULT STDMETHODCALLTYPE Input::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents notificationEvents, IDeckLinkDisplayMode *newDisplayMode, BMDDetectedVideoInputFormatFlags detectedSignalFlags) {
@@ -103,7 +134,7 @@ namespace ofxBlackmagic {
 			}
 
 			this->videoFrame.lock.lock();
-			this->texture.loadData(this->videoFrame.getPixels(), this->getWidth(), this->getHeight(), GL_RGBA);
+			this->texture.loadData(this->videoFrame.getPixels().getData, this->getWidth(), this->getHeight(), GL_RGBA);
 			this->videoFrame.lock.unlock();
 		}
 	}

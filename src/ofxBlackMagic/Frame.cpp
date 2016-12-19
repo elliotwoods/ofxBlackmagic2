@@ -62,7 +62,10 @@ namespace ofxBlackmagic {
 		case bmdFormat10BitRGB:
 		case bmdFormat10BitRGBXLE:
 		case bmdFormat10BitRGBX:
-			throw(std::runtime_error("Format not supported yet"));
+		{
+			auto & converter = Utils::CoManager::X().getVideoConverter();
+			converter.ConvertFrame(inputFrame, this);
+		}
 			break;
 		default:
 			break;
