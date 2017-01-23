@@ -134,7 +134,7 @@ namespace ofxBlackmagic {
 			}
 
 			this->videoFrame.lock.lock();
-			this->texture.loadData(this->videoFrame.getData(), this->getWidth(), this->getHeight(), GL_RGBA);
+			this->texture.loadData(this->videoFrame.getPixels(), GL_RGBA);
 			this->videoFrame.lock.unlock();
 		}
 	}
