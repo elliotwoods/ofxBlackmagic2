@@ -15,16 +15,61 @@ namespace ofxBlackmagic {
 		this->stopCapture();
 	}
 
+	HRESULT	STDMETHODCALLTYPE Input::QueryInterface(REFIID iid, LPVOID *ppv)
+	{
+		HRESULT	result = E_NOINTERFACE;
+
+		if (ppv == NULL)
+			return E_INVALIDARG;
+
+		// Initialise the return result
+		*ppv = NULL;
+
+		// Obtain the IUnknown interface and compare it the provided REFIID
+		if (iid == IID_IUnknown)
+		{
+			*ppv = this;
+			AddRef();
+			result = S_OK;
+		}
+		else if (iid == IID_IDeckLinkInputCallback)
+		{
+			*ppv = (IDeckLinkInputCallback*)this;
+			AddRef();
+			result = S_OK;
+		}
+		else if (iid == IID_IDeckLinkNotificationCallback)
+		{
+			*ppv = (IDeckLinkNotificationCallback*)this;
+			AddRef();
+			result = S_OK;
+		}
+
+		return result;
+	}
+
 	//---------
 	void Input::startCapture(const DeviceDefinition& device, const BMDDisplayMode& format) {
+		IDeckLinkAttributes*  deckLinkAttributes = NULL;
+		BOOL supportsFormatDetection = FALSE;
+		BMDVideoInputFlags videoInputFlags = bmdVideoInputFlagDefault;
 		try {
 			this->stopCapture();
 			this->device = device;
+
+			// Check if input mode detection is supported.
+			if (device.device->QueryInterface(IID_IDeckLinkAttributes, (void**)&deckLinkAttributes) == S_OK)
+			{
+				if (deckLinkAttributes->GetFlag(BMDDeckLinkSupportsInputFormatDetection, &supportsFormatDetection) != S_OK)
+					supportsFormatDetection = FALSE;
+				deckLinkAttributes->Release();
+			}
+			// Enable input video mode detection if the device supports it
+			if (supportsFormatDetection == TRUE)
+				videoInputFlags |= bmdVideoInputEnableFormatDetection;
+			this->device = device;
 			CHECK_ERRORS(device.device->QueryInterface(IID_IDeckLinkInput, (void**)&this->input), "Failed to query interface");
 			CHECK_ERRORS(this->input->SetCallback(this), "Failed to set input callback");
-			BMDVideoInputFlags videoInputFlags;
-			// Enable input video mode detection if the device supports it
-			videoInputFlags = bmdVideoInputEnableFormatDetection;
 			CHECK_ERRORS(this->input->EnableVideoInput(format, bmdFormat8BitYUV, videoInputFlags), "Failed to enable video input");
 			CHECK_ERRORS(this->input->StartStreams(), "Failed to start streams");
 			this->state = Running;
