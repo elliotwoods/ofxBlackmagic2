@@ -10,7 +10,6 @@ namespace ofxMachineVision {
 			this->input = nullptr;
 			this->referenceCount = 0;
 
-			this->openTime = 0;
 			this->frameIndex = 0;
 			this->markFrameNew = false;
 		}
@@ -67,12 +66,13 @@ namespace ofxMachineVision {
 				throw(ofxMachineVision::Exception(e.what()));
 			}
 			
-			this->openTime = ofGetElapsedTimeMicros();
 			this->frameIndex = 0;
 
-			Specification specification(width, height, "BlackMagic", device.modelName);
-			specification.addFeature(ofxMachineVision::Feature::Feature_DeviceID);
-			specification.addFeature(ofxMachineVision::Feature::Feature_FreeRun);
+			Specification specification(CaptureSequenceType::Continuous
+				, width
+				, height
+				, "BlackMagic"
+				, device.modelName);
 
 			return specification;
 		}
@@ -103,11 +103,6 @@ namespace ofxMachineVision {
 		//---------
 		void DeckLink::stopCapture() {
 			this->input->StopStreams();
-			//ensure the incoming frame isn't locked. should this be done by the grabber?
-			while (!this->incomingFrame->lockForWriting()) {
-				ofSleepMillis(1);
-			}
-			this->incomingFrame->unlock();
 		}
 
 		//---------
@@ -130,41 +125,35 @@ namespace ofxMachineVision {
 			const auto width = videoFrame->GetWidth();
 			const auto height = videoFrame->GetHeight();
 			const auto pixelCount = width * height;
-
+			
 			try {
 				//try to lock for writing
-				int tryCount = 0;
-				while (!this->incomingFrame->lockForWriting()) {
-					ofSleepMillis(1);
-					if (tryCount++ > 100) {
-						throw(ofxMachineVision::Exception("Timeout processing incoming frame"));
-					}
-				}
-
-				//check allocation
-				if (this->incomingFrame->getPixels().getWidth() != width || this->incomingFrame->getPixels().getHeight() != height) {
-					this->incomingFrame->getPixels().allocate(width, height, OF_IMAGE_GRAYSCALE);
-				}
+				auto frame = FramePool::X().getAvailableAllocatedFrame(width, height, ofPixelFormat::OF_PIXELS_GRAY);
 
 				//copy bytes out from frame
 				unsigned char * yuvBytes = nullptr;
 				CHECK_ERRORS(videoFrame->GetBytes((void**)& yuvBytes), "Failed to pull bytes from incoming video frame");
 
 				//copy UYVY -> YY
-				auto out = this->incomingFrame->getPixels().getPixels();
+				auto out = frame->getPixels().getPixels();
 				for (int i = 0; i < pixelCount; i++) {
 					//this method seems to be auto-SIMD optimised
 					out[i] = yuvBytes[i * 2 + 1];
 				}
 
-				this->incomingFrame->setTimestamp(ofGetElapsedTimeMicros() - this->openTime);
-				this->incomingFrame->setFrameIndex(this->frameIndex++);
-				this->incomingFrame->setEmpty(false);
+				//timestamp
+				{
+					BMDTimeValue timeValue;
+					BMDTimeValue frameDuration;
+					BMDTimeScale timeScale = 1e6;
+					videoFrame->GetStreamTime(&timeValue, &frameDuration, timeScale);
+					frame->setTimestamp(chrono::microseconds(timeValue));
+				}
 
-				this->incomingFrame->unlock();
+				frame->setFrameIndex(this->frameIndex++);
 
 				//alert the grabber
-				this->onNewFrame(this->incomingFrame);
+				this->onNewFrame(frame);
 			}
 			catch (ofxMachineVision::Exception e) {
 				OFXMV_ERROR << e.what();
