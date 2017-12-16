@@ -19,6 +19,9 @@
     <ClCompile Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_i.c">
       <Filter>src\ofxBlackmagic\vs</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ofxBlackMagic\Output.cpp">
+      <Filter>src\ofxBlackmagic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ofxBlackMagic\DeviceList.h">
@@ -41,6 +44,9 @@
     </ClInclude>
     <ClInclude Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_h.h">
       <Filter>src\ofxBlackmagic\vs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxBlackMagic\Output.h">
+      <Filter>src\ofxBlackmagic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
