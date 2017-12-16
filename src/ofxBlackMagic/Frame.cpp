@@ -88,6 +88,13 @@ namespace ofxBlackmagic {
 
 		//inputFrame->GetAncillaryData(&this->ancillary);
 	}
+	//----------
+	void Frame::swapFrame(Frame & fr)
+	{
+		std::swap(this->timecode, fr.timecode);
+		this->pixels.swap(fr.pixels);
+		std::swap(this->data, fr.data);
+	}
 	
 	//----------
 	int Frame::getWidth() const {
