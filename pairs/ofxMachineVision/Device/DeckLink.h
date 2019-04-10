@@ -18,7 +18,7 @@ namespace ofxMachineVision {
 
 			DeckLink();
 			string getTypeName() const override;
-			shared_ptr<Base::InitialisationSettings> getDefaultSettings() override {
+			shared_ptr<Base::InitialisationSettings> getDefaultSettings() const override {
 				return make_shared<InitialisationSettings>();
 			}
 
@@ -45,7 +45,6 @@ namespace ofxMachineVision {
 		protected:
 			int frameIndex;
 			bool markFrameNew;
-			ofxMachineVision::Microseconds openTime;
 
 			ofxBlackmagic::DeviceDefinition device;
 			BMDDisplayMode displayMode = bmdModeHD1080p30;
