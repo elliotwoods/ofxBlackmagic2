@@ -18,9 +18,11 @@ namespace ofxBlackmagic {
 
 		Frame();
 		~Frame();
+
 		void allocate(int width, int height);
 		void deallocate();
 		void copyFromFrame(IDeckLinkVideoFrame*);
+		void swapFrame(Frame& fr);
 
 		int getWidth() const;
 		int getHeight() const;
