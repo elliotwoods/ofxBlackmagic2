@@ -75,4 +75,4 @@ namespace ofxBlackmagic {
 	};
 }
 
-ostream & operator<<(ostream &, const ofxBlackmagic::Frame::Timecode &);
+std::ostream & operator<<(std::ostream &, const ofxBlackmagic::Frame::Timecode &);

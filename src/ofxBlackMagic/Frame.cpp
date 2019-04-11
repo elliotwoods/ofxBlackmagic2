@@ -188,7 +188,7 @@ namespace ofxBlackmagic {
 }
 
 //----------
-ostream & operator<<(ostream & os, const ofxBlackmagic::Frame::Timecode & timecode) {
+std::ostream & operator<<(std::ostream & os, const ofxBlackmagic::Frame::Timecode & timecode) {
 	os << (int) timecode.hours << "h" << (int) timecode.minutes << "m" << (int) timecode.seconds << "s" << (int) timecode.frames;
 	return os;
 }
