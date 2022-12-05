@@ -50,7 +50,6 @@ namespace ofxBlackmagic {
 
 	//---------
 	void Input::startCapture(const DeviceDefinition& device, const BMDDisplayMode& format) {
-		IDeckLinkAttributes*  deckLinkAttributes = NULL;
 		BOOL supportsFormatDetection = FALSE;
 		BMDVideoInputFlags videoInputFlags = bmdVideoInputFlagDefault;
 		try {
@@ -58,12 +57,17 @@ namespace ofxBlackmagic {
 			this->device = device;
 
 			// Check if input mode detection is supported.
+			/*
+			We removed this 2012-12 when we upgraded to c++17
+			IDeckLinkAttributes* deckLinkAttributes = NULL;
 			if (device.device->QueryInterface(IID_IDeckLinkAttributes, (void**)&deckLinkAttributes) == S_OK)
 			{
 				if (deckLinkAttributes->GetFlag(BMDDeckLinkSupportsInputFormatDetection, &supportsFormatDetection) != S_OK)
 					supportsFormatDetection = FALSE;
 				deckLinkAttributes->Release();
 			}
+			*/
+
 			// Enable input video mode detection if the device supports it
 			if (supportsFormatDetection == TRUE)
 				videoInputFlags |= bmdVideoInputEnableFormatDetection;
@@ -118,7 +122,12 @@ namespace ofxBlackmagic {
 
 	//---------
 #if defined(_WIN32)
-	HRESULT STDMETHODCALLTYPE Input::VideoInputFormatChanged(/* in */ BMDVideoInputFormatChangedEvents notificationEvents, /* in */ IDeckLinkDisplayMode *newMode, /* in */ BMDDetectedVideoInputFormatFlags detectedSignalFlags) {
+	HRESULT STDMETHODCALLTYPE
+		Input::VideoInputFormatChanged(
+		/* [in] */ BMDVideoInputFormatChangedEvents notificationEvents,
+		/* [in] */ IDeckLinkDisplayMode* newDisplayMode,
+		/* [in] */ BMDDetectedVideoInputFormatFlags detectedSignalFlags)
+	{
 				bool shouldRestartCaptureWithNewVideoMode = true;
 
 				BMDPixelFormat	pixelFormat = bmdFormat10BitYUV;
@@ -133,7 +142,7 @@ namespace ofxBlackmagic {
 					input->StopStreams();
 
 					// Set the video input mode
-					if (input->EnableVideoInput(newMode->GetDisplayMode(), pixelFormat, bmdVideoInputEnableFormatDetection) != S_OK) {
+					if (input->EnableVideoInput(newDisplayMode->GetDisplayMode(), pixelFormat, bmdVideoInputEnableFormatDetection) != S_OK) {
 						ofLogError("This application was unable to select the new video mode.");
 						goto bail;
 					}

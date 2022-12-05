@@ -16,11 +16,14 @@
     <ClCompile Include="..\src\ofxBlackmagic\Frame.cpp">
       <Filter>src\ofxBlackmagic</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_i.c">
-      <Filter>src\ofxBlackmagic\vs</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\ofxBlackMagic\Output.cpp">
       <Filter>src\ofxBlackmagic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxBlackMagic\vs\platform.cpp">
+      <Filter>src\ofxBlackmagic\vs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_i.c">
+      <Filter>src\ofxBlackmagic\vs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,10 +45,16 @@
     <ClInclude Include="..\src\ofxBlackmagic\Frame.h">
       <Filter>src\ofxBlackmagic</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ofxBlackMagic\vs\DeckLinkAPI_h.h">
+    <ClInclude Include="..\src\ofxBlackMagic\Output.h">
+      <Filter>src\ofxBlackmagic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxBlackMagic\vs\platform.h">
       <Filter>src\ofxBlackmagic\vs</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ofxBlackMagic\Output.h">
+    <ClInclude Include="..\src\ofxBlackMagic\vs\DeckLinkAPI.h">
+      <Filter>src\ofxBlackmagic\vs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxBlackMagic\Include_DeckLinkSDK.h">
       <Filter>src\ofxBlackmagic</Filter>
     </ClInclude>
   </ItemGroup>

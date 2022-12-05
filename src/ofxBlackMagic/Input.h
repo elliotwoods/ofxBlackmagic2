@@ -6,6 +6,8 @@
 #include "DeviceList.h"
 #include "ofMain.h"
 
+#include "Include_DeckLinkSDK.h"
+
 namespace ofxBlackmagic {
 	class Input : public IDeckLinkInputCallback, public ofBaseUpdates, public ofBaseDraws, public ofBaseHasPixels, public ofBaseHasTexture {
 	public:
@@ -24,7 +26,10 @@ namespace ofxBlackmagic {
 		//IDeckLinkInputCallback
 		//
 #if defined(_WIN32)
-		HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) override;
+		HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(
+			/* [in] */ BMDVideoInputFormatChangedEvents notificationEvents,
+			/* [in] */ IDeckLinkDisplayMode* newDisplayMode,
+			/* [in] */ BMDDetectedVideoInputFormatFlags detectedSignalFlags) override;
 #elif defined(__APPLE_CC__)
 		HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(BMDVideoInputFormatChangedEvents notificationEvents, IDeckLinkDisplayMode *newDisplayMode, BMDDetectedVideoInputFormatFlags detectedSignalFlags) override;
 #endif

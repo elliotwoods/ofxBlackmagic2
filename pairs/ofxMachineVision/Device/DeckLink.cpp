@@ -107,7 +107,12 @@ namespace ofxMachineVision {
 
 		//---------
 #if defined(_WIN32)
-		HRESULT STDMETHODCALLTYPE DeckLink::VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) {
+		HRESULT STDMETHODCALLTYPE
+			DeckLink::VideoInputFormatChanged(
+				/* [in] */ BMDVideoInputFormatChangedEvents notificationEvents,
+				/* [in] */ IDeckLinkDisplayMode* newDisplayMode,
+				/* [in] */ BMDDetectedVideoInputFormatFlags detectedSignalFlags)
+		{
 			return S_OK;
 		}
 #elif defined(__APPLE_CC__)
@@ -135,7 +140,7 @@ namespace ofxMachineVision {
 				CHECK_ERRORS(videoFrame->GetBytes((void**)& yuvBytes), "Failed to pull bytes from incoming video frame");
 
 				//copy UYVY -> YY
-				auto out = frame->getPixels().getPixels();
+				auto out = frame->getPixels().getData();
 				for (int i = 0; i < pixelCount; i++) {
 					//this method seems to be auto-SIMD optimised
 					out[i] = yuvBytes[i * 2 + 1];

@@ -32,7 +32,10 @@ namespace ofxMachineVision {
 
 			// IDeckLinkInputCallback interface
 #if defined(_WIN32)
-			HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(unsigned long, IDeckLinkDisplayMode*, unsigned long) override;
+			virtual HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(
+				/* [in] */ BMDVideoInputFormatChangedEvents notificationEvents,
+				/* [in] */ IDeckLinkDisplayMode* newDisplayMode,
+				/* [in] */ BMDDetectedVideoInputFormatFlags detectedSignalFlags) override;
 #elif defined(__APPLE_CC__)
 			HRESULT STDMETHODCALLTYPE VideoInputFormatChanged(BMDVideoInputFormatChangedEvents notificationEvents, IDeckLinkDisplayMode *newDisplayMode, BMDDetectedVideoInputFormatFlags detectedSignalFlags) override;
 #endif
